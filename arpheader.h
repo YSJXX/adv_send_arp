@@ -1,26 +1,26 @@
 #pragma once
 #define ARPHEADER_H
 
-#include<stdint.h>
-
+#include <stdint.h>
+#include <stdlib.h>
 
 
 
 struct allpacket
 {
-    uint8_t e_dmac[6];
-    uint8_t e_smac[6];
-    uint16_t type;
+    u_char e_dmac[6];
+    u_char e_smac[6];
+    u_short type;
 
-    uint16_t hd_type;
-    uint16_t protocol_type;
-    uint8_t hd_size;
-    uint8_t protocol_size;
-    uint16_t opcode;
-    uint8_t a_s_mac[6];
-    uint32_t a_s_protocol[4];
-    uint8_t a_t_mac[6];
-    uint32_t a_t_protocol[4];
+    u_short hd_type;
+    u_short protocol_type;
+    u_char hd_size;
+    u_char protocol_size;
+    u_short opcode;
+    u_char a_s_mac[6];
+    u_long a_s_protocol[4];
+    u_char a_t_mac[6];
+    u_long a_t_protocol[4];
 };
 
 
