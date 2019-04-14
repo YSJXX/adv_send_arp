@@ -1,9 +1,10 @@
-#pragma once
-#define ARPHEADER_H
-
 #include <stdint.h>
 #include <stdlib.h>
 
+#pragma once
+#define ARPHEADER_H
+
+#pragma pack(push,1)
 
 
 struct allpacket
@@ -18,10 +19,11 @@ struct allpacket
     u_char protocol_size;
     u_short opcode;
     u_char a_s_mac[6];
-    u_long a_s_protocol[4];
+    u_char a_s_protocol[4];
     u_char a_t_mac[6];
-    u_long a_t_protocol[4];
+    u_char a_t_protocol[4];
 };
+#pragma pack(pop)
 
 
 #define ETHERTYPE_ARP   0x0806
