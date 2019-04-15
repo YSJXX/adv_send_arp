@@ -28,13 +28,7 @@ void input(char* argv[],pcap_t *handle,int sw,const u_char *packet)
         change_sender_ip = 4;
         change_target_ip = 5;
     }
-    /*
-   //IP check
-  int i=0;
-  for(i=2;i<4;i++)
-  {
-      printf("aa %s\n",argv[i]);
-  }*/
+
 
    // Mac Adderss -------------------------------
   struct ifreq s;
@@ -56,7 +50,7 @@ void input(char* argv[],pcap_t *handle,int sw,const u_char *packet)
   u_char pkt[PACKETSIZE];
   struct allpacket *s_packet = (struct allpacket *)pkt;
   //struct allpacket *s_packet = malloc(sizeof(struct allpacket));
-  //struct allpacket *r_packet = (struct allpacket *) (packet);
+ 
   // dmac search--------------------------------------
 
 
@@ -184,12 +178,7 @@ void input(char* argv[],pcap_t *handle,int sw,const u_char *packet)
      printf(" %d",(inet_addr(argv[change_sender_ip])&0x0000FF00)>>8);
      printf(" %d",(inet_addr(argv[change_sender_ip])&0x00FF0000)>>16);
      printf(" %d \n",(inet_addr(argv[change_sender_ip])&0xFF000000)>>24);
-     /*
-     printf("%02x \n",packet[38]);
-     printf("%02x \n",packet[39]);
-     printf("%02x \n",packet[40]);
-     printf("%02x \n",packet[41]);
-      */
+  
 
         int res = pcap_sendpacket(handle,pkt,sizeof(pkt));
 
@@ -243,22 +232,6 @@ int main(int argc, char* argv[]) {
 
 
 
-            //save packet
-            /*
-            for(int i=0; i<=5; i++)
-            {
-                    dsave_sender_mac[count-1][i] = new_packet->e_smac[i];
-                    printf("        *****save packet %02x \n",dsave_sender_mac[count-1][i]);
-            }
-            if(count == 1 || argc == 6)
-            for(int x=0; x<=5; x++)
-            {
-                    if(dsave_sender_mac[count-1][x] == new_packet->e_smac[x] )
-                        //printf("******************%d\n",sender_smac_ch);
-                        sender_smac_ch += 1;
-            }
-            */
-
             if(ntohs(new_packet->type) == ETHERTYPE_ARP
                     && ntohs(new_packet->opcode) == ARPOP_REPLY)
                 if(count == 1)
@@ -305,14 +278,7 @@ int main(int argc, char* argv[]) {
 
             printf("search...\n");
 
-            //if(ntohs(while_packet->type) == 0x0806)
-            //    printf("type :: %04x \n",ntohs(while_packet->type));
-            //if(ntohs(while_packet->opcode) == 0x0001)
-            //    printf("opcode :: %04x \n",ntohs(while_packet->opcode));
-            //if(sender_smac_ch == 5)
-            //    printf("semder_smac_ch :: %d \n",sender_smac_ch);
-            //if(sender_dmac_ch == 5)
-            //    printf("semder_dmac_ch :: %d \n",sender_dmac_ch);
+
 
             if(ntohs(while_packet->type) == 0x0806 && ntohs(while_packet->opcode) == 0x0001
                     && argv1_sender_smac_ch == 6 && sender_dmac_ch == 6)
